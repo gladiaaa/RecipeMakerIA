@@ -24,13 +24,15 @@ pip install -r requirements.txt
 
 2. Lancer le modèle IA avec Ollama :
 
-bash
+```bash
 ollama run llava
-
+```
 
 3. Démarrer le serveur Flask :
 
+```bash
 python app.py
+```
 
 4. Tester une image localement :
 
