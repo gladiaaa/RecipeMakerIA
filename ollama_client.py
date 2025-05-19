@@ -1,24 +1,22 @@
-import requests
 import base64
+import requests
 
-def encode_image_base64(path):
-    with open(path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
+def ask_ollama(image_path, prompt):
+    with open(image_path, "rb") as img_file:
+        image_bytes = img_file.read()
+        encoded_image = base64.b64encode(image_bytes).decode("utf-8")
 
-def ask_ollama(image_path, prompt, model="llava"):
-    image_b64 = encode_image_base64(image_path)
+    payload = {
+        "model": "llava",
+        "prompt": prompt,
+        "images": [encoded_image],
+        "stream": False
+    }
 
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": model,
-            "prompt": prompt,
-            "images": [image_b64],
-            "stream": False
-        }
-    )
-
-    if response.status_code != 200:
-        raise Exception(f"Ollama Error: {response.status_code} - {response.text}")
-
-    return response.json()["response"]
+    try:
+        response = requests.post("http://localhost:11434/api/generate", json=payload)
+        response.raise_for_status()
+        result = response.json()
+        return result.get("response", "[Erreur] Aucune réponse générée.")
+    except Exception as e:
+        return f"[Erreur Ollama] {str(e)}"
