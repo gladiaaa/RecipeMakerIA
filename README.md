@@ -1,43 +1,72 @@
+# 🧠🍽️ RecipeGenAI – Générateur de recettes à partir d’une image
 
-# ♻️ Tri Sélectif IA — Analyse d’images avec Flask & Ollama
-
-Projet backend Python utilisant **Flask** et **Ollama (modèle LLaVA)** pour détecter le type de déchet visible sur une image et déterminer la poubelle correspondante (jaune, verte, bleue, grise, compost).
+Ce projet permet de **générer automatiquement une recette de cuisine** en analysant une simple **photo d’ingrédients** grâce à l’IA visuelle **LLaVA** (via Ollama) et un serveur Flask.
 
 ---
 
 ## 🚀 Fonctionnalités
 
-- Upload d’image via API REST
-- Analyse d’image avec Ollama (`llava`)
-- Extraction automatique du type de déchet et de la poubelle
-- Système prêt à intégrer une base de données (référentiel ou historique)
+- 📷 Analyse automatique d’une image contenant plusieurs ingrédients
+- 🧠 Génération d’une **recette réaliste et personnalisée** avec étapes
+- 🔗 Utilise le modèle **llava** de **Ollama**
+- 🌐 API REST via Flask (port 5050)
+- 🧪 Client de test local (`test.py`)
 
 ---
 
-## 🛠 Installation & Exécution
+## 🗂️ Structure du projet
 
-1. Installer les dépendances Python :
+```
+trashfilter/
+│
+├── uploads/                # Dossier où sont stockées les images uploadées
+├── utils/                  # (optionnel) fonctions supplémentaires
+├── app.py                  # Serveur Flask (port 5050)
+├── ollama_client.py        # Interrogation du modèle LLaVA via Ollama
+├── test.py                 # Script de test local
+├── requirements.txt        # Dépendances Python
+├── salutiana.jpg           # Image de test
+└── README.md               # Ce fichier
+```
+
+---
+
+## 🔧 Installation
+
+### 1. Clone et entre dans le projet
+
+```bash
+git clone <repo_url>
+cd trashfilter
+```
+
+### 2. Installe les dépendances
 
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Lancer le modèle IA avec Ollama :
+### 3. Lance Ollama et télécharge le modèle
 
 ```bash
 ollama run llava
 ```
 
-3. Démarrer le serveur Flask :
+> Assure-toi qu’Ollama est bien installé : https://ollama.com
+
+### 4. Démarre le serveur Flask
 
 ```bash
 python app.py
 ```
 
-4. Tester une image localement :
+L’API est accessible sur : `http://localhost:5050/recette`
 
-- Placer l’image dans `uploads/`
-- Modifier `test.py` si besoin, puis exécuter :
+---
+
+## 🧪 Test local
+
+Lance le script `test.py` pour envoyer une image et obtenir une recette :
 
 ```bash
 python test.py
@@ -45,32 +74,42 @@ python test.py
 
 ---
 
-## 📁 Arborescence minimale
+## 📤 Exemple de requête API
 
-```
-tri-selectif-backend/
-├── app.py
-├── ollama_client.py
-├── test.py
-├── requirements.txt
-├── uploads/
-├── utils/
-│   └── process_response.py
-```
+### Méthode : `POST /recette`
 
----
+- **Body** : `form-data`
+  - `image`: fichier `.jpg` / `.png`
 
-## 📌 Exemple de réponse
+### Exemple avec `curl` :
 
-```json
-{
-  "response": "Il s'agit d'une peau de banane. Elle doit aller dans le compost.",
-  "poubelle": "compost"
-}
+```bash
+curl -X POST http://localhost:5050/recette \
+  -F "image=@salutiana.jpg"
 ```
 
 ---
 
-## 👤 Auteur
+## 🛠️ Technologies utilisées
 
-Développé par **gladia**  
+- Python 3.11+
+- Flask
+- Ollama (modèle `llava`)
+- requests, werkzeug
+- base64 (encodage image)
+
+---
+
+## 💡 Avenir possible
+
+- Interface web React
+- Choix du modèle dynamiquement (`llava`, `llama3`, etc.)
+- Traduction multilingue
+- Export PDF ou partage social
+
+---
+
+## 👨‍💻 Auteur
+
+Projet initié par **[Ton nom / pseudo]** – 2025  
+📫 Contact : ton.email@exemple.com
