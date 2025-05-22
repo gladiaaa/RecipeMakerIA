@@ -2,11 +2,13 @@ from flask import Flask, request, jsonify
 import os
 from werkzeug.utils import secure_filename
 from ollama_client import ask_ollama
+from flask_cors import CORS
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
+CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
@@ -28,7 +30,7 @@ def generate_recipe():
 
     prompt = (
         "Observe les ingrédients visibles sur cette image et génère une recette simple que l’on peut réaliser "
-        "avec ce que tu vois. Donne les étapes et les ingrédients détectés."
+        "avec ce que tu vois. Donne uniquement les étapes et les ingrédients détectés."
     )
 
     response = ask_ollama(image_path, prompt)
@@ -36,4 +38,4 @@ def generate_recipe():
     return jsonify({'recette': response})
     
 if __name__ == '__main__':
-    app.run(debug=True, port=5050)
+    app.run(host='0.0.0.0', debug=True, port=5050)
