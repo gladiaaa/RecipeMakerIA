@@ -1,4 +1,4 @@
-# 🧠🍽️ RecipeGenAI – Générateur de recettes à partir d’une image
+# 🧠🍽️ RecipeMakerAI – Générateur de recettes à partir d’une image
 
 Ce projet permet de **générer automatiquement une recette de cuisine** en analysant une simple **photo d’ingrédients** grâce à l’IA visuelle **LLaVA** (via Ollama) et un serveur Flask.
 
