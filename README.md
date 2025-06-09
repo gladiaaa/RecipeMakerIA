@@ -33,28 +33,28 @@ trashfilter/
 
 ## 🔧 Installation
 
-### 1. Clone et entre dans le projet
+### 1. Clonez et entre dans le projet
 
 ```bash
-git clone <repo_url>
-cd trashfilter
+git clone https://github.com/gladiaaa/RecipeMakerIA.git
+cd RecipeMakerIA
 ```
 
-### 2. Installe les dépendances
+### 2. Installez les dépendances
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Lance Ollama et télécharge le modèle
+### 3. Lancez Ollama et téléchargez le modèle
 
 ```bash
 ollama run llava
 ```
 
-> Assure-toi qu’Ollama est bien installé : https://ollama.com
+> Assurez-vous qu’Ollama est bien installé : https://ollama.com
 
-### 4. Démarre le serveur Flask
+### 4. Démarrez le serveur Flask
 
 ```bash
 python app.py
@@ -66,7 +66,7 @@ L’API est accessible sur : `http://localhost:5050/recette`
 
 ## 🧪 Test local
 
-Lance le script `test.py` pour envoyer une image et obtenir une recette :
+Lancez le script `test.py` pour envoyer une image et obtenir une recette :
 
 ```bash
 python test.py
@@ -111,5 +111,4 @@ curl -X POST http://localhost:5050/recette \
 
 ## 👨‍💻 Auteur
 
-Projet initié par **[Ton nom / pseudo]** – 2025  
-📫 Contact : ton.email@exemple.com
+Projet initié par **[Ryan Annic]** – 2025  
